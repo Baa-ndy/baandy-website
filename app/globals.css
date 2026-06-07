@@ -1,32 +1,114 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  /* Deeper, more editorial brand — drops the electric feel */
+  --color-brand: #2a1458;
+  --color-brand-deep: #1a0c3a;
+  --color-brand-accent: #4a1fd9; /* reserved for tiny accents only */
 
-  --color-ink: #111111;
-  --color-paper: #f7f5f0;
-  --color-muted: #6b6862;
-  --color-accent: #ff5b3a;
+  /* Cool off-white, not cream */
+  --color-paper: #f4f2f7;
+  --color-paper-warm: #ece8f0;
+
+  /* Near-black with a purple undertone */
+  --color-ink: #14091f;
+
+  /* Pinks unchanged — they're the soul of the brand */
+  --color-pink: #f2cbcb;
+  --color-pink-deep: #e8a6a6;
 }
 
-@layer base {
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
+@theme inline {
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
 
-  body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-  }
+:root {
+  --brand: var(--color-brand);
+  --brand-deep: var(--color-brand-deep);
+  --paper: var(--color-paper);
+  --ink: var(--color-ink);
+}
 
-  ::selection {
-    background: var(--color-ink);
-    color: var(--color-paper);
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 18px;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: var(--color-ink);
+}
+
+/* Fraunces optical sizing — automatic via font-display class */
+.font-display {
+  font-feature-settings: "ss01", "ss02";
+  font-optical-sizing: auto;
+}
+
+/* Hero entrance — staggered fade-up on initial load */
+@keyframes hero-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-rise {
+  animation: hero-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Marquee scroll for city pairs */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 45s linear infinite;
+}
+
+/* Subtle pulse for the smile arc decoration */
+@keyframes smile-drift {
+  0%,
+  100% {
+    transform: rotate(-12deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-12deg) translateY(-8px);
+  }
+}
+
+.animate-smile-drift {
+  animation: smile-drift 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

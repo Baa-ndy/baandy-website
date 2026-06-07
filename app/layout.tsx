@@ -1,29 +1,25 @@
-import type { Metadata } from "next";
-import { Inter, Instrument_Serif } from "next/font/google";
-import "./globals.css";
+import { EB_Garamond, Chivo_Mono } from "next/font/google";
 
-const inter = Inter({
+const ebGaramond = EB_Garamond({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
+  variable: "--font-eb-garamond",
 });
 
-const instrumentSerif = Instrument_Serif({
+const chivoMono = Chivo_Mono({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-serif",
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
+  variable: "--font-chivo-mono",
 });
-
-export const metadata: Metadata = {
-  title: "Baandy",
-  description: "Trade homes, not money. A fairer way to travel.",
-};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${ebGaramond.variable} ${chivoMono.variable}`}>
+      <body className="bg-paper font-body text-ink antialiased">{children}</body>
     </html>
   );
 }
