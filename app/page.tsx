@@ -221,7 +221,7 @@ function Hero() {
             into{" "}
             <span className="relative inline-block">
               <span
-                className="absolute -inset-x-3 inset-y-3 -rotate-[1.5deg] rounded-md bg-pink lg:inset-y-5"
+                className="absolute -inset-x-3 inset-y-3 -rotate-[1.5deg] rounded-md lg:inset-y-5"
                 aria-hidden
               />
               <span className="relative">free travel</span>
@@ -277,14 +277,25 @@ function Hero() {
   );
 }
 
+import Image from "next/image";
+
 function HeroPair() {
   return (
     <div className="relative aspect-[4/5] w-full">
       <div className="absolute left-0 top-0 h-[68%] w-[62%] -rotate-3 overflow-hidden rounded-2xl bg-pink shadow-2xl shadow-brand/10">
-        <div className="flex h-full flex-col justify-between p-5">
+        <div className="flex h-full flex-col justify-between p-4">
           <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-brand">
             <span>Lisbon</span>
             <span>PT</span>
+          </div>
+          <div className="relative my-2 h-[52%] overflow-hidden rounded-xl">
+            <Image
+              src="/lisbon-blue.jpg"
+              alt="The blue-tiled flat in Alfama"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+            />
           </div>
           <div>
             <div className="font-display text-2xl leading-tight text-ink">
@@ -294,12 +305,20 @@ function HeroPair() {
           </div>
         </div>
       </div>
-
       <div className="absolute bottom-0 right-0 h-[68%] w-[62%] rotate-3 overflow-hidden rounded-2xl bg-brand shadow-2xl shadow-brand/30">
-        <div className="flex h-full flex-col justify-between p-5 text-paper">
+        <div className="flex h-full flex-col justify-between p-4 text-paper">
           <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] opacity-70">
             <span>York</span>
             <span>UK</span>
+          </div>
+          <div className="relative my-2 h-[52%] overflow-hidden rounded-xl">
+            <Image
+              src="/york-cottage.jpg"
+              alt="The garden cottage in Bishopthorpe"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+            />
           </div>
           <div>
             <div className="font-display text-2xl leading-tight">
@@ -309,7 +328,6 @@ function HeroPair() {
           </div>
         </div>
       </div>
-
       <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-paper shadow-lg">
           <SmileArc className="h-8 w-8 text-brand" />
@@ -318,7 +336,6 @@ function HeroPair() {
     </div>
   );
 }
-
 function Marquee() {
   const items = ["Lisbon ↔ York", "Mexico City ↔ Berlin", "Tokyo ↔ Lyon", "Bristol ↔ Marrakech", "Athens ↔ Cape Town", "Edinburgh ↔ Oaxaca"];
   return (
