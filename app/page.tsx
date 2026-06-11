@@ -928,13 +928,7 @@ function BaandAid() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 rounded-full bg-pink px-4 py-2 text-sm text-ink">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand/60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
-                </span>
-                <span>Optional. Never required.</span>
-              </div>
+      
             </div>
           </Reveal>
 
@@ -1127,28 +1121,24 @@ function FAQ() {
   const items = [
     {
       q: "Is it really free?",
-      a: "Yes. Sign up, list your home, swap, repeat — all free, forever. No tokens, no per-swap fee, no surprise upgrade. We may add an optional premium tier for the most prolific swappers, but the core experience stays free. That's the whole point.",
+      a: "YES! We want everyone to be able to Baandy! Signing up for the app is totally free and you’ll be able to complete your swaps without paying a penny for the app or your accommodation. Unlike other home swapping apps you won’t need to buy tokens to swap or pay a fee for each swap. We will be introducing a premium version of the app for our most avid swappers but we promise to keep the free version so you’ll always be able to Baandy for free.",
     },
     {
       q: "What's the catch?",
-      a: "Genuinely, there isn't one. Baandy is the platform we wished existed — people swapping the homes they already pay for, without anyone taking a cut. No data sold, no fees inserted later, no exit strategy.",
+      a: "Genuinely, there isn't one - we want to ensure people can take advantage of increased work flexibility to live and work from anywhere. We want people to travel more - but with care, really immersing themselves in the place they visit.",
     },
     {
-      q: "Is it actually safe?",
+      q: "Is home swapping safe?",
       a: "Home swapping has been around since 1952 and is having a quiet boom. You'll see profiles, photos, and reviews before you ever agree to a swap. For total peace of mind, Baand-Aid covers your home and contents up to £50,000 — from £4 a night. Optional, never required.",
     },
     {
-      q: "What if I rent my place?",
-      a: "You can still Baandy. We've got a guide on the legal bits — landlord permissions, contents insurance, the small print — so renters can swap without worrying about what their lease says.",
+      q: "Why do I want to baandy?",
+      a:`If you want to make the most of your work/life flexibility and travel more, without using up all your annual leave or using up all your travel budget, baandy is for you. You’ll get your own personal guide to your new destination so you can experience the real essence of a place - where to go for pizza, the best bar to go to on a Tuesday night, and where to find those vintage pieces you love without paying tourist prices. 
+
+We are bringing together a community who care about travel consciously and carefully, about understanding the places and people you are visiting. People who don’t want to live small lives.`
+   
     },
-    {
-      q: "Can I bring a partner, friends, or family?",
-      a: "Of course. The swap works as long as everyone — you, your travel companions, and the person you're matching with — has agreed to who's coming and what's involved. Be honest in the chat, and you're set.",
-    },
-    {
-      q: "Do I have to swap with the same person I'm hosting?",
-      a: "Usually yes — direct swaps are the simplest. But we're rolling out three-way and time-shifted swaps for cases where your dates and theirs don't line up. The maths still works either way.",
-    },
+  
   ];
   return (
     <section id="faq" className="border-b border-ink/8 py-24 lg:py-32">
