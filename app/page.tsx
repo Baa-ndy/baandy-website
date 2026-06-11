@@ -25,9 +25,10 @@ export default function HomePage() {
       <HowItWorks />
       <Maths />
       <Swaps />
-         <BaandAid />
+      <BaandAid />
       <Manifesto />
       <Feed />
+      <FAQ />
       <Signup />
       <Footer />
     </main>
@@ -50,13 +51,25 @@ function BaandyLogo({ className = "" }: { className?: string }) {
   );
 }
 
-function SmileArc({ className = "" }: { className?: string }) {
+function SmileArc({
+  className = "",
+  stretch = false,
+}: {
+  className?: string;
+  stretch?: boolean;
+}) {
   return (
-    <svg viewBox="0 0 120 24" fill="none" className={className} aria-hidden>
+    <svg
+      viewBox="0 0 120 56"
+      fill="none"
+      preserveAspectRatio={stretch ? "none" : "xMidYMid meet"}
+      className={className}
+      aria-hidden
+    >
       <path
-        d="M2 4c14 16 42 18 58 18s44-2 58-18"
+        d="M9 8c10 30 28 41 51 41s41-11 51-41"
         stroke="currentColor"
-        strokeWidth="3"
+        strokeWidth="13"
         strokeLinecap="round"
         fill="none"
       />
@@ -183,11 +196,12 @@ function Nav() {
           <BaandyLogo className="h-9 w-9" />
           <span className="font-display text-2xl tracking-tight text-ink">Baandy</span>
         </a>
-        <nav className="hidden items-center gap-8 text-sm text-ink/70 md:flex">
+        <nav className="hidden items-center gap-7 text-sm text-ink/70 lg:flex">
           <a href="#how" className="transition hover:text-ink">How it works</a>
           <a href="#maths" className="transition hover:text-ink">The maths</a>
           <a href="#swaps" className="transition hover:text-ink">Swaps</a>
-          <a href="#manifesto" className="transition hover:text-ink">Manifesto</a>
+          <a href="#baand-aid" className="transition hover:text-ink">Baand-Aid</a>
+          <a href="#faq" className="transition hover:text-ink">FAQ</a>
         </nav>
         <a
           href="#download"
@@ -203,7 +217,7 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-ink/8">
-      <div className="mx-auto grid max-w-7xl gap-12  py-20 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:py-28">
         <div className="lg:col-span-7">
           <div
             className="animate-hero-rise inline-flex items-center gap-2 rounded-full border border-ink/15 px-3.5 py-1.5 text-xs uppercase tracking-[0.18em] text-ink/70"
@@ -222,11 +236,14 @@ function Hero() {
             into{" "}
             <span className="relative inline-block">
               <span
-                className="absolute -inset-x-3 inset-y-3 -rotate-[1.5deg] rounded-md lg:inset-y-5"
+                className="absolute -inset-x-3 inset-y-3 -rotate-[1.5deg] rounded-md bg-pink lg:inset-y-5"
                 aria-hidden
               />
               <span className="relative">free travel</span>
-              <SmileArc className="absolute -bottom-3 left-0 h-3 w-full text-brand" />
+              <SmileArc
+                stretch
+                className="absolute -bottom-5 left-0 h-4 w-full text-brand"
+              />
             </span>
             .
           </h1>
@@ -277,8 +294,8 @@ function Hero() {
     </section>
   );
 }
-
 import Image from "next/image";
+import { LucideSquareArrowUp, RotateCcwKey } from "lucide-react";
 
 function HeroPair() {
   return (
@@ -329,14 +346,12 @@ function HeroPair() {
           </div>
         </div>
       </div>
-      <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-paper shadow-lg">
-          <SmileArc className="h-8 w-8 text-brand" />
-        </div>
-      </div>
+   
     </div>
   );
 }
+
+
 function Marquee() {
   const items = ["Lisbon ↔ York", "Mexico City ↔ Berlin", "Tokyo ↔ Lyon", "Bristol ↔ Marrakech", "Athens ↔ Cape Town", "Edinburgh ↔ Oaxaca"];
   return (
@@ -408,7 +423,7 @@ function HowItWorks() {
 
         <div className="mt-16 grid gap-5 lg:grid-cols-3 lg:gap-6">
           {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 140}>
+            <Reveal key={s.n} delay={i * 140} className="h-full">
               <div
                 className={`group h-full rounded-3xl p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-ink/15 lg:p-10 ${s.bg}`}
               >
@@ -475,20 +490,16 @@ function FancyInlineSelect({
 
   useEffect(() => {
     if (!open) return;
-
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-
     const escHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-
     document.addEventListener("mousedown", handler);
     document.addEventListener("keydown", escHandler);
-
     return () => {
       document.removeEventListener("mousedown", handler);
       document.removeEventListener("keydown", escHandler);
@@ -496,19 +507,20 @@ function FancyInlineSelect({
   }, [open]);
 
   return (
-    <span ref={ref} className="relative z-[999] inline-block align-baseline">
+    <span ref={ref} className="relative inline-block align-baseline">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         className={`cursor-pointer border-b-[3px] border-dashed pb-1 font-display italic text-brand transition-colors duration-200 focus:outline-none ${
-          open ? "border-brand" : "border-pink-deep hover:border-brand"
+          open
+            ? "border-brand"
+            : "border-pink-deep hover:border-brand"
         }`}
       >
         {value}
       </button>
-
       <div
-        className={`absolute left-0 top-full z-[999] mt-3 origin-top-left transition-all duration-200 ease-out ${
+        className={`absolute left-0 top-full z-50 mt-3 origin-top-left transition-all duration-200 ease-out ${
           open
             ? "pointer-events-auto scale-100 opacity-100"
             : "pointer-events-none scale-95 opacity-0"
@@ -551,16 +563,21 @@ function Maths() {
   return (
     <section
       id="maths"
-      className="relative overflow-hidden border-b border-ink/8 bg-paper-warm py-24 lg:py-32"
+      className="relative border-b border-ink/8 bg-paper-warm py-24 lg:py-32"
     >
-      <SmileArc
-        className="pointer-events-none absolute -right-16 top-12 h-40 w-[28rem] -rotate-12 text-pink/40"
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden
-      />
-      <SmileArc
-        className="pointer-events-none absolute -left-20 bottom-16 h-32 w-[22rem] rotate-[8deg] text-brand/8"
-        aria-hidden
-      />
+      >
+        <SmileArc
+          stretch
+          className="absolute -right-16 top-12 h-40 w-[28rem] -rotate-12 text-pink/40"
+        />
+        <SmileArc
+          stretch
+          className="absolute -left-20 bottom-16 h-32 w-[22rem] rotate-[8deg] text-brand/8"
+        />
+      </div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
@@ -569,7 +586,7 @@ function Maths() {
           </div>
         </Reveal>
 
-        <Reveal delay={120} className="relative z-50">
+        <Reveal delay={120} className="relative z-30">
           <p className="mt-10 font-display text-[clamp(2.25rem,7vw,6rem)] font-light leading-[1.05] tracking-tight text-ink">
             I live in{" "}
             <FancyInlineSelect
@@ -605,7 +622,6 @@ function Maths() {
                   illustrative
                 </div>
               </div>
-
               <div className="mt-8 font-display text-[clamp(3.5rem,10vw,8rem)] font-light leading-[0.9] text-ink/30 tabular-nums">
                 <span className="relative inline-block">
                   £{animatedCost.toLocaleString()}
@@ -615,7 +631,6 @@ function Maths() {
                   />
                 </span>
               </div>
-
               <div className="mt-6 flex items-baseline gap-3 text-sm text-ink/45">
                 <span>{nights} nights</span>
                 <span className="h-1 w-1 rounded-full bg-ink/20" />
@@ -634,11 +649,9 @@ function Maths() {
                 </div>
                 <SmileArc className="h-4 w-12 text-brand transition-transform duration-500 group-hover:scale-110" />
               </div>
-
               <div className="mt-8 font-display text-[clamp(3.5rem,10vw,8rem)] font-light italic leading-[0.9]">
                 nothing.
               </div>
-
               <div className="mt-6 text-sm text-ink/60">
                 Forever and always. No fees later. No catch.
               </div>
@@ -653,7 +666,6 @@ function Maths() {
               thing about Baandy isn&apos;t how much you save. It&apos;s{" "}
               <em className="text-brand">how little money appears at all.</em>
             </p>
-
             <div className="flex items-end">
               <div className="text-sm text-ink/55">
                 <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-brand">
@@ -672,6 +684,7 @@ function Maths() {
     </section>
   );
 }
+
 function Swaps() {
   return (
     <section id="swaps" className="border-b border-ink/8 py-24 lg:py-32">
@@ -700,14 +713,14 @@ function Swaps() {
         </Reveal>
 
         <div className="mt-20 grid gap-8 lg:grid-cols-2">
-          <Reveal delay={0}>
+          <Reveal delay={0} className="h-full">
             <SupportingPair
               a={{ city: "Oaxaca, MX", title: "the courtyard house", host: "Mateo", color: "#FFE5C2" }}
               b={{ city: "Lyon, FR", title: "the atelier above the boulangerie", host: "Camille", color: "#D8B4F8" }}
               note="three weeks · still in progress"
             />
           </Reveal>
-          <Reveal delay={140}>
+          <Reveal delay={140} className="h-full">
             <SupportingPair
               a={{ city: "Athens, GR", title: "the marble balcony", host: "Eleni", color: "#B5D9C8" }}
               b={{ city: "Edinburgh, UK", title: "the old town tenement", host: "Finlay", color: "#E8A6A6" }}
@@ -723,109 +736,6 @@ function Swaps() {
     </section>
   );
 }
-function BaandAid() {
-  const coverage = [
-    "Damage to the building",
-    "Damage to your contents",
-    "Damage to adjacent properties",
-    "Theft by guest",
-    "Fire — and the re-build",
-  ];
-  return (
-    <section
-      id="baand-aid"
-      className="relative border-b border-ink/8 bg-paper-warm py-24 lg:py-32"
-    >
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-20">
-          <Reveal className="lg:col-span-6">
-            <div className="text-xs uppercase tracking-[0.18em] text-brand">
-              Baand-Aid · the safety net
-            </div>
-            <h2 className="mt-4 font-display text-5xl font-light leading-[1] tracking-tight text-ink lg:text-7xl">
-              For the <em className="text-brand">one in a thousand</em>
-              <br />
-              swap that goes sideways.
-            </h2>
-            <p className="mt-8 max-w-xl text-lg text-ink/70">
-              Almost every swap ends with keys handed back, plants alive, and
-              a &ldquo;let&apos;s do this again next year&rdquo; message. For
-              everything else, we partnered with an insurance provider so
-              your home and your stuff are covered.
-            </p>
- 
-            <div className="mt-12 flex flex-wrap items-end gap-8">
-              <div>
-                <div className="text-xs uppercase tracking-[0.18em] text-ink/50">
-                  From
-                </div>
-                <div className="mt-2 flex items-baseline gap-2">
-                  <span className="font-display text-[clamp(4rem,7vw,6rem)] font-light leading-none text-brand">
-                    £4
-                  </span>
-                  <span className="font-display text-2xl italic text-ink/60">
-                    /night
-                  </span>
-                </div>
-              </div>
- 
-              <div className="flex items-center gap-3 rounded-full bg-pink px-4 py-2 text-sm text-ink">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand/60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
-                </span>
-                <span>Optional. Never required.</span>
-              </div>
-            </div>
-          </Reveal>
- 
-          <Reveal delay={140} className="lg:col-span-6">
-            <div className="relative overflow-hidden rounded-3xl bg-paper p-8 shadow-2xl shadow-ink/10 lg:p-10">
-              <div className="flex items-baseline justify-between gap-4">
-                <div className="text-xs uppercase tracking-[0.18em] text-brand">
-                  What&apos;s covered
-                </div>
-                <div className="text-right">
-                  <div className="text-[10px] uppercase tracking-[0.18em] text-ink/40">
-                    up to
-                  </div>
-                  <div className="font-display text-3xl font-light text-ink lg:text-4xl">
-                    £50,000
-                  </div>
-                </div>
-              </div>
- 
-              <ul className="mt-8 space-y-5 border-t border-ink/10 pt-6">
-                {coverage.map((item, i) => (
-                  <li
-                    key={item}
-                    className="group flex items-center gap-4 text-ink"
-                  >
-                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-pink/50 transition-transform duration-300 group-hover:scale-110">
-                      <SmileArc className="h-3 w-5 text-brand" />
-                    </div>
-                    <span className="font-display text-lg lg:text-xl">
-                      {item}
-                    </span>
-                    <span className="ml-auto text-xs tabular-nums text-ink/30">
-                      0{i + 1}
-                    </span>
-                  </li>
-                ))}
-              </ul>
- 
-              <div className="mt-8 border-t border-ink/10 pt-6 text-sm text-ink/55">
-                Underwritten by a licensed UK insurer. Decide per swap. Cancel
-                any time before the swap starts.
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
- 
 
 function FeaturedSwap() {
   return (
@@ -907,7 +817,7 @@ function SupportingPair({
   note: string;
 }) {
   return (
-    <div className="rounded-3xl bg-pink/20 p-5 transition-all duration-500 hover:-translate-y-1 hover:bg-pink/30 hover:shadow-xl hover:shadow-ink/10 lg:p-6">
+    <div className="h-full rounded-3xl bg-pink/20 p-5 transition-all duration-500 hover:-translate-y-1 hover:bg-pink/30 hover:shadow-xl hover:shadow-ink/10 lg:p-6">
       <div className="grid grid-cols-2 gap-3">
         <div
           className="aspect-square overflow-hidden rounded-xl p-4"
@@ -969,6 +879,109 @@ function SwapTicker() {
         </div>
       ))}
     </div>
+  );
+}
+
+function BaandAid() {
+  const coverage = [
+    "Damage to the building",
+    "Damage to your contents",
+    "Damage to adjacent properties",
+    "Theft by guest",
+    "Fire — and the re-build",
+  ];
+  return (
+    <section
+      id="baand-aid"
+      className="relative border-b border-ink/8 bg-paper-warm py-24 lg:py-32"
+    >
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-20">
+          <Reveal className="lg:col-span-6">
+            <div className="text-xs uppercase tracking-[0.18em] text-brand">
+              Baand-Aid · the safety net
+            </div>
+            <h2 className="mt-4 font-display text-5xl font-light leading-[1] tracking-tight text-ink lg:text-7xl">
+              For the <em className="text-brand">one in a thousand</em>
+              <br />
+              swap that goes sideways.
+            </h2>
+            <p className="mt-8 max-w-xl text-lg text-ink/70">
+              Almost every swap ends with keys handed back, plants alive, and
+              a &ldquo;let&apos;s do this again next year&rdquo; message. For
+              everything else, we partnered with an insurance provider so
+              your home and your stuff are covered.
+            </p>
+
+            <div className="mt-12 flex flex-wrap items-end gap-8">
+              <div>
+                <div className="text-xs uppercase tracking-[0.18em] text-ink/50">
+                  From
+                </div>
+                <div className="mt-2 flex items-baseline gap-2">
+                  <span className="font-display text-[clamp(4rem,7vw,6rem)] font-light leading-none text-brand">
+                    £4
+                  </span>
+                  <span className="font-display text-2xl italic text-ink/60">
+                    /night
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-full bg-pink px-4 py-2 text-sm text-ink">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand/60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
+                </span>
+                <span>Optional. Never required.</span>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={140} className="lg:col-span-6">
+            <div className="relative overflow-hidden rounded-3xl bg-paper p-8 shadow-2xl shadow-ink/10 lg:p-10">
+              <div className="flex items-baseline justify-between gap-4">
+                <div className="text-xs uppercase tracking-[0.18em] text-brand">
+                  What&apos;s covered
+                </div>
+                <div className="text-right">
+                  <div className="text-[10px] uppercase tracking-[0.18em] text-ink/40">
+                    up to
+                  </div>
+                  <div className="font-display text-3xl font-light text-ink lg:text-4xl">
+                    £50,000
+                  </div>
+                </div>
+              </div>
+
+              <ul className="mt-8 space-y-5 border-t border-ink/10 pt-6">
+                {coverage.map((item, i) => (
+                  <li
+                    key={item}
+                    className="group flex items-center gap-4 text-ink"
+                  >
+                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-pink/50 transition-transform duration-300 group-hover:scale-110">
+                      <SmileArc className="h-3 w-5 text-brand" />
+                    </div>
+                    <span className="font-display text-lg lg:text-xl">
+                      {item}
+                    </span>
+                    <span className="ml-auto text-xs tabular-nums text-ink/30">
+                      0{i + 1}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8 border-t border-ink/10 pt-6 text-sm text-ink/55">
+                Underwritten by a licensed UK insurer. Decide per swap. Cancel
+                any time before the swap starts.
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1110,6 +1123,118 @@ function Feed() {
   );
 }
 
+function FAQ() {
+  const items = [
+    {
+      q: "Is it really free?",
+      a: "Yes. Sign up, list your home, swap, repeat — all free, forever. No tokens, no per-swap fee, no surprise upgrade. We may add an optional premium tier for the most prolific swappers, but the core experience stays free. That's the whole point.",
+    },
+    {
+      q: "What's the catch?",
+      a: "Genuinely, there isn't one. Baandy is the platform we wished existed — people swapping the homes they already pay for, without anyone taking a cut. No data sold, no fees inserted later, no exit strategy.",
+    },
+    {
+      q: "Is it actually safe?",
+      a: "Home swapping has been around since 1952 and is having a quiet boom. You'll see profiles, photos, and reviews before you ever agree to a swap. For total peace of mind, Baand-Aid covers your home and contents up to £50,000 — from £4 a night. Optional, never required.",
+    },
+    {
+      q: "What if I rent my place?",
+      a: "You can still Baandy. We've got a guide on the legal bits — landlord permissions, contents insurance, the small print — so renters can swap without worrying about what their lease says.",
+    },
+    {
+      q: "Can I bring a partner, friends, or family?",
+      a: "Of course. The swap works as long as everyone — you, your travel companions, and the person you're matching with — has agreed to who's coming and what's involved. Be honest in the chat, and you're set.",
+    },
+    {
+      q: "Do I have to swap with the same person I'm hosting?",
+      a: "Usually yes — direct swaps are the simplest. But we're rolling out three-way and time-shifted swaps for cases where your dates and theirs don't line up. The maths still works either way.",
+    },
+  ];
+  return (
+    <section id="faq" className="border-b border-ink/8 py-24 lg:py-32">
+      <div className="mx-auto max-w-5xl px-6 lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <Reveal className="lg:col-span-4">
+            <div className="text-xs uppercase tracking-[0.18em] text-brand">
+              Common questions
+            </div>
+            <h2 className="mt-4 font-display text-5xl font-light leading-[1] tracking-tight text-ink lg:text-6xl">
+              You ask.
+              <br />
+              <em className="text-brand">We answer.</em>
+            </h2>
+            <p className="mt-6 text-ink/60">
+              Still got questions? Email us at{" "}
+              <a
+                href="mailto:hello@baandy.co.uk"
+                className="text-brand underline decoration-pink-deep decoration-2 underline-offset-4 transition hover:decoration-brand"
+              >
+                hello@baandy.co.uk
+              </a>{" "}
+              and we&apos;ll get back to you within a day.
+            </p>
+          </Reveal>
+
+          <div className="lg:col-span-8">
+            <div className="border-t border-ink/10">
+              {items.map((item, i) => (
+                <Reveal key={item.q} delay={i * 60}>
+                  <FAQItem q={item.q} a={item.a} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-ink/10">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="group flex w-full items-center justify-between gap-6 py-6 text-left transition lg:py-8"
+      >
+        <span
+          className={`font-display text-xl leading-tight transition-colors duration-300 lg:text-2xl ${
+            open ? "text-brand" : "text-ink group-hover:text-brand"
+          }`}
+        >
+          {q}
+        </span>
+        <span
+          className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+            open
+              ? "-rotate-12 scale-110 bg-brand text-pink"
+              : "bg-pink/40 text-brand group-hover:bg-pink"
+          }`}
+          aria-hidden
+        >
+          <SmileArc className="h-3 w-5" />
+        </span>
+      </button>
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-400 ease-out ${
+          open
+            ? "grid-rows-[1fr] opacity-100"
+            : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <p className="max-w-2xl pb-6 pr-12 text-ink/70 lg:pb-8 lg:text-lg">
+            {a}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Signup() {
   return (
     <section id="download" className="border-b border-ink/8 bg-brand py-24 text-paper lg:py-32">
@@ -1151,9 +1276,9 @@ function Footer() {
             </p>
           </div>
           {[
-            { h: "Product", links: ["How it works", "The maths", "App store", "Play store"] },
+            { h: "Product", links: ["How it works", "The maths", "FAQ", "App store"] },
+            { h: "Trust", links: ["Baand-Aid", "Safety", "Privacy", "Terms"] },
             { h: "Company", links: ["Manifesto", "Studio notes", "Press", "Contact"] },
-            { h: "Trust", links: ["Safety", "Privacy", "Terms", "Cookie policy"] },
           ].map((col) => (
             <div key={col.h}>
               <div className="text-xs uppercase tracking-[0.18em] text-ink/50">{col.h}</div>
