@@ -14,6 +14,8 @@ import { Manifesto } from "@/components/sections/Manifesto";
 import { Signup } from "@/components/sections/Signup";
 import { Swaps } from "@/components/sections/Swaps";
 import { Maths } from "@/components/sections/TheMath";
+
+
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
@@ -24,7 +26,6 @@ const geist = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
 export default function HomePage() {
   return (
     <main

@@ -1,5 +1,7 @@
 import { BaandyLogo } from "../ui/Logo";
 
+
+
 export function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink/8 bg-paper/80 backdrop-blur">
@@ -14,6 +16,7 @@ export function Nav() {
           <a href="#swaps" className="transition hover:text-ink">Swaps</a>
           <a href="#baand-aid" className="transition hover:text-ink">Baand-Aid</a>
           <a href="#faq" className="transition hover:text-ink">FAQ</a>
+              <a href="/progress" className="transition hover:text-ink">Portal</a>
         </nav>
         <a
           href="#download"
