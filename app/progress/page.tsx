@@ -1,7 +1,6 @@
 import { TASK_STATUSES, type TaskStatus } from "@/lib/db";
 import { getActiveTasks, getTeamMembers } from "./queries";
 import { Board } from "./components/Board";
-import '../../app/globals.css';
 const VISIBLE_STATUSES: TaskStatus[] = TASK_STATUSES.filter((s) => s !== "blocked");
 
 export default async function ProgressPage() {

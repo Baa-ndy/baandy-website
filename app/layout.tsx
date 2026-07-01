@@ -1,4 +1,5 @@
 import { EB_Garamond, Chivo_Mono } from "next/font/google";
+import "./globals.css";
 
 const ebGaramond = EB_Garamond({
   subsets: ["latin"],

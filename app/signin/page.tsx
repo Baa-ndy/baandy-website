@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { SignInButton } from "./SignInButton";
-import '../../app/globals.css';
 export const metadata = {
   title: "Sign in · Baandy portal",
 };
