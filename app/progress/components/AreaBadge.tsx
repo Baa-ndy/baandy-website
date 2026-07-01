@@ -2,12 +2,12 @@ import clsx from "clsx";
 import type { TaskArea } from "@/lib/db";
 
 const AREA_STYLES: Record<TaskArea, string> = {
-  mobile: "bg-brand/10 text-brand",
-  backend: "bg-pink-deep/15 text-pink-deep",
-  website: "bg-ink/8 text-ink/70",
-  design: "bg-pink/30 text-ink",
-  ops: "bg-brand-accent/10 text-brand-accent",
-  general: "bg-ink/5 text-ink/60",
+  mobile: "bg-brand/5 text-brand/80",
+  backend: "bg-pink-deep/10 text-pink-deep/90",
+  website: "bg-ink/5 text-ink/55",
+  design: "bg-pink/20 text-ink/70",
+  ops: "bg-brand-accent/5 text-brand-accent/80",
+  general: "bg-ink/[0.03] text-ink/50",
 };
 
 const AREA_LABEL: Record<TaskArea, string> = {

@@ -7,9 +7,9 @@ import clsx from "clsx";
 import { TASK_STATUSES, type TaskStatus, type User } from "@/lib/db";
 import type { TaskWithPeople } from "../queries";
 import { updateTaskStatus } from "../actions";
-import { TaskDetailDrawer } from "./TaskDetailDrawer";
+import { TaskDetailModal } from "./TaskDetailModal";
 import { AreaBadge } from "./AreaBadge";
-import { PriorityDot } from "./PriorityDot";
+import { PriorityLabel } from "./PriorityLabel";
 
 type Member = Pick<User, "id" | "name" | "email" | "imageUrl">;
 
@@ -47,9 +47,9 @@ export function TaskCard({ task, members, columnStatus }: Props) {
     <>
       <article
         className={clsx(
-          "group relative cursor-pointer rounded-md border border-ink/10 bg-paper px-3 py-3 text-left text-sm shadow-sm transition hover:border-brand/40",
+          "group relative cursor-pointer rounded-md border border-ink/5 bg-paper px-3 py-3 text-left text-sm shadow-sm transition hover:bg-paper-warm/40",
           isPending && "opacity-60",
-          isBlocked && "border-pink-deep/40 bg-pink/10",
+          isBlocked && "border-pink-deep/30 bg-pink/10",
         )}
       >
         <button
@@ -57,10 +57,16 @@ export function TaskCard({ task, members, columnStatus }: Props) {
           onClick={() => setOpen(true)}
           className="block w-full text-left"
         >
-          <div className="flex items-start gap-2">
-            <PriorityDot priority={task.priority} />
+          <div className="flex items-start justify-between gap-3">
             <p className="flex-1 font-medium leading-snug text-ink">{task.title}</p>
+            <PriorityLabel priority={task.priority} />
           </div>
+
+          {task.description ? (
+            <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-ink/55">
+              {task.description}
+            </p>
+          ) : null}
 
           <div className="mt-3 flex items-center justify-between gap-2">
             <AreaBadge area={task.area} />
@@ -70,7 +76,7 @@ export function TaskCard({ task, members, columnStatus }: Props) {
                   src={task.assignee.imageUrl}
                   alt={task.assignee.name}
                   title={task.assignee.name}
-                  className="h-5 w-5 rounded-full border border-ink/10 object-cover"
+                  className="h-5 w-5 rounded-full object-cover ring-1 ring-ink/5"
                   referrerPolicy="no-referrer"
                 />
               ) : (
@@ -98,7 +104,7 @@ export function TaskCard({ task, members, columnStatus }: Props) {
               <ChevronDown className="h-3 w-3" />
             </button>
             {menuOpen ? (
-              <div className="absolute right-0 z-10 mt-1 w-36 rounded-md border border-ink/10 bg-paper py-1 shadow-lg">
+              <div className="absolute right-0 z-10 mt-1 w-36 rounded-md border border-ink/5 bg-paper py-1 shadow-lg">
                 {TASK_STATUSES.map((s) => (
                   <button
                     key={s}
@@ -119,7 +125,7 @@ export function TaskCard({ task, members, columnStatus }: Props) {
       </article>
 
       {open ? (
-        <TaskDetailDrawer
+        <TaskDetailModal
           task={task}
           members={members}
           onClose={() => {

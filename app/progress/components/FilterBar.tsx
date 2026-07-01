@@ -64,7 +64,7 @@ export function FilterBar({
             className={clsx(
               "rounded-sm px-2 py-1 font-mono text-[10px] uppercase tracking-wider",
               filters.area === area
-                ? "bg-ink text-paper"
+                ? "bg-pink text-ink"
                 : "bg-ink/5 text-ink/60 hover:bg-ink/10",
             )}
           >

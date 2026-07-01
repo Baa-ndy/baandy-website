@@ -295,7 +295,7 @@ function Hero() {
   );
 }
 import Image from "next/image";
-import { LucideSquareArrowUp, RotateCcwKey } from "lucide-react";
+import { LucideSquareArrowUp, RotateCcwIcon } from "lucide-react";
 
 function HeroPair() {
   return (
