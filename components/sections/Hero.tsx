@@ -1,68 +1,156 @@
-"use client";
 
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { PairAtom } from "@/components/ui/PairAtom";
-import { Reveal } from "@/components/ui/Reveal";
-import { AppStoreButtons } from "../ui/AppStoreButtons";
-
-function AppleGlyph() {
-  return (
-    <svg viewBox="0 0 384 512" className="h-7 w-7 fill-white" aria-hidden="true">
-      <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
-    </svg>
-  );
-}
-
-function PlayGlyph() {
-  return (
-    <svg viewBox="0 0 512 512" className="h-6 w-6" aria-hidden="true">
-      <polygon points="60,52 60,256 285,256" fill="#34A853" />
-      <polygon points="60,256 60,460 285,256" fill="#FBBC04" />
-      <polygon points="60,52 285,256 468,256" fill="#EA4335" />
-      <polygon points="60,460 285,256 468,256" fill="#4285F4" />
-    </svg>
-  );
-}
-
-function StoreButton({ href, top, main, glyph }: { href: string; top: string; main: string; glyph: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      className="group inline-flex items-center gap-3 rounded-2xl bg-ink px-5 py-3 text-white shadow-sticker transition-all duration-150 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-sticker-press active:translate-x-[5px] active:translate-y-[5px] active:shadow-none"
-    >
-      {glyph}
-      <span className="flex flex-col leading-tight">
-        <span className="font-sans text-[11px] text-white/70">{top}</span>
-        <span className="font-sans text-lg font-semibold tracking-tight">{main}</span>
-      </span>
-    </a>
-  );
-}
+import { AppStoreBadge, PlayStoreBadge } from "@/app/progress/components/AppRedirectButtons";
+import Image from "next/image";
+import { SmileArc } from "../ui/SmileArc";
 
 export function Hero() {
   return (
-    <section className="w-full bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-24">
-        <div className="grid items-center gap-14 md:grid-cols-[1.05fr_1fr] md:gap-16">
-         <Reveal as="div">
-  <Eyebrow>like airbnb — but free &amp; ethical</Eyebrow>
-</Reveal>
-<Reveal>
-  <h1 className="mt-4 max-w-[14ch] font-display text-[clamp(46px,6.6vw,104px)] font-medium leading-[0.97] tracking-[-0.018em]">
-    turn your rent into <em className="italic">free travel</em>.
-  </h1>
-</Reveal>
-<Reveal>
-  <div className="mt-7 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
-    <p className="max-w-[46ch] text-[clamp(18px,1.5vw,22px)] leading-[1.5] text-ink/60">
-      You stay in someone&apos;s home while they stay in yours. No money changes hands, no
-      landlords get richer. The home you already have is the only ticket you need.
-    </p>
-    <AppStoreButtons />
-  </div>
-</Reveal>
+    <section className="relative overflow-hidden border-b border-ink/8">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:py-28">
+        <div className="lg:col-span-7">
+          <div
+            className="animate-hero-rise inline-flex items-center gap-2 rounded-full border border-ink/15 px-3.5 py-1.5 text-xs uppercase tracking-[0.18em] text-ink/70"
+            style={{ animationDelay: "0ms" }}
+          >
+            <span className="text-base">🌍</span>
+            Hinge for holidays — free & ethical
+          </div>
+
+          <h1
+            className="animate-hero-rise mt-8 font-display text-[clamp(3rem,8vw,7.5rem)] font-light leading-[0.92] tracking-[-0.025em] text-ink"
+            style={{ animationDelay: "120ms" }}
+          >
+            Turn your <em className="not-italic text-brand">rent</em>
+            <br />
+            into{" "}
+            <span className="relative inline-block">
+              <span
+                className="absolute -inset-x-3 inset-y-3 -rotate-[1.5deg] rounded-md bg-pink lg:inset-y-5"
+                aria-hidden
+              />
+              <span className="relative">free travel</span>
+              <SmileArc
+                stretch
+                className="absolute -bottom-5 left-0 h-4 w-full text-brand"
+              />
+            </span>
+            .
+          </h1>
+
+          <p
+            className="animate-hero-rise mt-8 max-w-xl text-lg text-ink/70 lg:text-xl"
+            style={{ animationDelay: "260ms" }}
+          >
+            A transactionless home-swapping platform. No hosts. No fees. No
+            professional landlords skimming off the top. Two people trading
+            what they already have, so neither has to pay.
+          </p>
+
+          <div
+            className="animate-hero-rise mt-10 flex flex-wrap items-center gap-4"
+            style={{ animationDelay: "360ms" }}
+          >
+            <AppStoreBadge />
+            <PlayStoreBadge />
+          </div>
+
+          <div
+            className="animate-hero-rise mt-10 flex items-center gap-6 text-sm text-ink/60"
+            style={{ animationDelay: "460ms" }}
+          >
+            <div className="flex -space-x-2">
+              {["#F2CBCB", "#E8A6A6", "#D8B4F8", "#FFE5C2"].map((c, i) => (
+                <div
+                  key={i}
+                  className="h-8 w-8 rounded-full border-2 border-paper"
+                  style={{ background: c }}
+                />
+              ))}
+            </div>
+            <span>
+              <span className="font-medium text-ink">12,400</span> swaps and zero pounds exchanged
+            </span>
+          </div>
+        </div>
+
+        <div
+          className="animate-hero-rise lg:col-span-5"
+          style={{ animationDelay: "300ms" }}
+        >
+          <HeroPair />
         </div>
       </div>
     </section>
+  );
+}
+
+
+export  function HeroPair() {
+  return (
+    <div className="relative aspect-[4/5] w-full">
+      <div className="absolute left-0 top-0 h-[68%] w-[62%] -rotate-3 overflow-hidden rounded-2xl bg-pink shadow-2xl shadow-brand/10">
+        <div className="flex h-full flex-col justify-between p-4">
+          <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-brand">
+            <span>Lisbon</span>
+            <span>PT</span>
+          </div>
+          <div className="relative my-2 h-[52%] overflow-hidden rounded-xl">
+            <Image
+     
+              src="/lisbon-blue.jpg"
+              alt="The blue-tiled flat in Alfama"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <div className="font-display text-2xl leading-tight text-ink">
+              The blue-tiled flat
+            </div>
+            <div className="mt-1 text-sm text-ink/70">Ana, 2 bed · Alfama</div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-0 right-0 h-[68%] w-[62%] rotate-3 overflow-hidden rounded-2xl bg-brand shadow-2xl shadow-brand/30">
+        <div className="flex h-full flex-col justify-between p-4 text-paper">
+          <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] opacity-70">
+            <span>York</span>
+            <span>UK</span>
+          </div>
+          <div className="relative my-2 h-[52%] overflow-hidden rounded-xl">
+            <Image
+              src="/york-cottage.jpg"
+              alt="The garden cottage in Bishopthorpe"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <div className="font-display text-2xl leading-tight">
+              The garden cottage
+            </div>
+            <div className="mt-1 text-sm opacity-80">Noor, 1 bed · Bishopthorpe</div>
+          </div>
+        </div>
+      </div>
+   
+    </div>
+  );
+}
+export function Marquee() {
+  const items = ["Lisbon ↔ York", "Mexico City ↔ Berlin", "Tokyo ↔ Lyon", "Bristol ↔ Marrakech", "Athens ↔ Cape Town", "Edinburgh ↔ Oaxaca"];
+  return (
+    <div className="overflow-hidden border-b border-ink/8 py-6">
+      <div className="flex animate-[scroll_40s_linear_infinite] gap-12 whitespace-nowrap text-2xl text-ink/30 lg:text-3xl">
+        {[...items, ...items, ...items].map((item, i) => (
+          <span key={i} className="font-display italic">
+            {item} <span className="not-italic text-brand">·</span>
+          </span>
+        ))}
+      </div>
+      <style>{`@keyframes scroll { to { transform: translateX(-33.333%) } }`}</style>
+    </div>
   );
 }

@@ -1,105 +1,46 @@
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Btn } from "@/components/ui/Btn";
-import { Reveal } from "@/components/ui/Reveal";
-import { SwapCard } from "@/components/ui/SwapCard";
-import type { PlateColourway } from "@/components/ui/Plate";
-
-interface TickerItem {
-  bold: string;
-  rest: string;
-}
-
-interface SwapEntry {
-  left: PlateColourway;
-  right: PlateColourway;
-  route: string;
-  when: string;
-  note: string;
-}
-
-const tickerItems: TickerItem[] = [
-  { bold: "14 people", rest: "arriving in Lisbon this week" },
-  { bold: "9 homes", rest: "opened up in Hackney" },
-  { bold: "Sofia & Noor", rest: "just matched · Porto ↔ Bristol" },
-  { bold: "31 swaps", rest: "happening right now" },
-  { bold: "2 homes", rest: "returned to long-term renters this month" },
-];
-
-const swaps: SwapEntry[] = [
-  {
-    left: "bristol",
-    right: "porto",
-    route: "Bristol ↔ Porto",
-    when: "3 weeks",
-    note: "A terrace by the river for a tiled flat in the old town.",
-  },
-  {
-    left: "hackney",
-    right: "oaxaca",
-    route: "Hackney ↔ Oaxaca",
-    when: "a month",
-    note: "Two desks, fast wifi, and a courtyard full of jacaranda.",
-  },
-  {
-    left: "kyoto",
-    right: "naples",
-    route: "Kyoto ↔ Naples",
-    when: "10 nights",
-    note: "A machiya with a tea room for a flat under Vesuvius.",
-  },
-  {
-    left: "oslo",
-    right: "lisbon",
-    route: "Oslo ↔ Lisbon",
-    when: "2 weeks",
-    note: "Fjord light traded for a balcony over the Tejo.",
-  },
-  {
-    left: "porto",
-    right: "hackney",
-    route: "Porto ↔ Hackney",
-    when: "3 weeks",
-    note: "Sofia & Noor — matched on Tuesday, swapping in June.",
-  },
-  {
-    left: "naples",
-    right: "oslo",
-    route: "Naples ↔ Oslo",
-    when: "a fortnight",
-    note: "Sun for snow. Both families, both with kids, both delighted.",
-  },
-];
+import { Reveal } from "../ui/Reveal";
 
 export function Feed() {
-  const tickerLoop = [...tickerItems, ...tickerItems];
-
+  const stories = [
+    {
+      tag: "Story",
+      title: "How two YouTube editors swapped flats for a summer",
+      meta: "London ↔ Lisbon · 6 min read",
+    },
+    {
+      tag: "Guide",
+      title: "Your first swap: what to leave, what to lock away",
+      meta: "Baandy guides · 4 min read",
+    },
+    {
+      tag: "Field notes",
+      title: "Why we chose pink for everything",
+      meta: "From the studio · 3 min read",
+    },
+  ];
   return (
-    <section id="feed" className="section-pad">
-      <div className="wrap-wide">
-        <Reveal className="ticker">
-          <div className="ticker-track">
-            {tickerLoop.map((item, i) => (
-              <span className="item" key={i}>
-                <span className="dot" /> <b>{item.bold}</b> {item.rest}
-              </span>
-            ))}
-          </div>
+    <section className="border-b border-ink/8 py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <Reveal>
+          <div className="text-xs uppercase tracking-[0.18em] text-brand">The feed</div>
+          <h2 className="mt-4 max-w-2xl font-display text-5xl font-light leading-[1] tracking-tight text-ink lg:text-6xl">
+            Stories from the swap.
+          </h2>
         </Reveal>
 
-        <Reveal className="section-head" as="div">
-          <div>
-            <Eyebrow>this week on baandy</Eyebrow>
-            <h2 className="display" style={{ margin: "14px 0 0" }}>
-              real swaps, <em>really</em> happening.
-            </h2>
-          </div>
-          <Btn href="#feed" variant="ghost">browse every swap</Btn>
-        </Reveal>
-
-        <div className="feed-grid">
-          {swaps.map((s) => (
-            <Reveal key={s.route}>
-              <SwapCard {...s} />
+        <div className="mt-16 grid gap-8 lg:grid-cols-3">
+          {stories.map((s, i) => (
+            <Reveal key={s.title} delay={i * 130}>
+              <a href="#" className="group block">
+                <div className="aspect-[5/4] overflow-hidden rounded-2xl bg-ink/5 transition-all duration-500 group-hover:scale-[1.02] group-hover:bg-pink/40" />
+                <div className="mt-5 text-xs uppercase tracking-[0.18em] text-brand">
+                  {s.tag}
+                </div>
+                <div className="mt-2 font-display text-2xl leading-tight text-ink transition group-hover:text-brand">
+                  {s.title}
+                </div>
+                <div className="mt-2 text-sm text-ink/60">{s.meta}</div>
+              </a>
             </Reveal>
           ))}
         </div>
@@ -107,3 +48,6 @@ export function Feed() {
     </section>
   );
 }
+
+
+

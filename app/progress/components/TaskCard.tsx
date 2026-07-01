@@ -10,6 +10,7 @@ import { updateTaskStatus } from "../actions";
 import { TaskDetailModal } from "./TaskDetailModal";
 import { AreaBadge } from "./AreaBadge";
 import { PriorityLabel } from "./PriorityLabel";
+import Image from "next/image";
 
 type Member = Pick<User, "id" | "name" | "email" | "imageUrl">;
 
@@ -72,10 +73,12 @@ export function TaskCard({ task, members, columnStatus }: Props) {
             <AreaBadge area={task.area} />
             {task.assignee ? (
               task.assignee.imageUrl ? (
-                <img
+                <Image
                   src={task.assignee.imageUrl}
                   alt={task.assignee.name}
                   title={task.assignee.name}
+                  width={5}
+                  height={5}
                   className="h-5 w-5 rounded-full object-cover ring-1 ring-ink/5"
                   referrerPolicy="no-referrer"
                 />

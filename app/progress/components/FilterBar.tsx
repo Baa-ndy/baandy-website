@@ -51,7 +51,7 @@ export function FilterBar({
           onClick={() => onChange({ ...filters, area: null })}
           className={clsx(
             "rounded-sm px-2 py-1 font-mono text-[10px] uppercase tracking-wider",
-            filters.area === null ? "bg-ink text-paper" : "bg-ink/5 text-ink/60 hover:bg-ink/10",
+            filters.area === null ? "bg-pink text-ink" : "bg-ink/5 text-ink/60 hover:bg-ink/10",
           )}
         >
           All

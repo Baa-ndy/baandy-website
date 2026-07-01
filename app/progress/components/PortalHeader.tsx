@@ -1,15 +1,18 @@
 import Link from "next/link";
 import { SignOutButton } from "./SignOutButton";
 import type { SessionData } from "@/lib/session";
-
+import { BaandyLogo } from "@/components/ui/Logo";
+import Image from "next/image";
 export function PortalHeader({ user }: { user: SessionData }) {
   return (
     <header className="border-b border-ink/10 bg-paper-warm/60 backdrop-blur">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
         <Link href="/progress" className="flex items-center gap-3">
-          <span className="font-display text-xl tracking-tight">Baandy</span>
+          <BaandyLogo className="h-9 w-9" />
+
+                    <span className="font-display text-2xl tracking-tight text-ink">Baandy</span>
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">
-            portal
+            Team portal
           </span>
         </Link>
 
@@ -29,7 +32,9 @@ export function PortalHeader({ user }: { user: SessionData }) {
             <p className="text-[10px]">{user.email}</p>
           </div>
           {user.imageUrl ? (
-            <img
+            <Image
+              width={32}
+              height={32}
               src={user.imageUrl}
               alt=""
               className="h-8 w-8 rounded-full border border-ink/10 object-cover"

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-
+import Image from "next/image";
 export type PlateColourway =
   | "lisbon"
   | "porto"
@@ -25,7 +25,7 @@ export function Plate({ colourway, pin, caption, glow = false, image, imageAlt =
     <div className={cn("plate relative overflow-hidden", `h-${colourway}`, className)}>
       {image && (
         <>
-          <img
+          <Image
             src={image}
             alt={imageAlt}
             loading="lazy"

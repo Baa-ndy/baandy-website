@@ -1,33 +1,25 @@
-interface SmileArcProps {
-  width?: number;
-  height?: number;
-  className?: string;
-  strokeWidth?: number;
-  draw?: boolean;
-}
 
 export function SmileArc({
-  width = 22,
-  height = 14,
-  className,
-  strokeWidth = 2.4,
-  draw = false,
-}: SmileArcProps) {
+  className = "",
+  stretch = false,
+}: {
+  className?: string;
+  stretch?: boolean;
+}) {
   return (
     <svg
-      width={width}
-      height={height}
-      viewBox="0 0 22 14"
-      aria-hidden="true"
+      viewBox="0 0 120 56"
+      fill="none"
+      preserveAspectRatio={stretch ? "none" : "xMidYMid meet"}
       className={className}
+      aria-hidden
     >
       <path
-        d="M2 3 Q11 16 20 3"
-        fill="none"
+        d="M9 8c10 30 28 41 51 41s41-11 51-41"
         stroke="currentColor"
-        strokeWidth={strokeWidth}
+        strokeWidth="13"
         strokeLinecap="round"
-        className={draw ? "smile-draw" : undefined}
+        fill="none"
       />
     </svg>
   );

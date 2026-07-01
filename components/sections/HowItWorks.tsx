@@ -1,118 +1,95 @@
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Reveal } from "@/components/ui/Reveal";
-
-interface Step {
-  n: string;
-  title: string;
-  body: string;
-}
-
-interface Trust {
-  icon: React.ReactNode;
-  title: string;
-  body: string;
-}
-
-const steps: Step[] = [
-  {
-    n: "01",
-    title: "open up your home",
-    body: "Show it like it's yours — the books, the light, the cat. Not a listing. A portrait.",
-  },
-  {
-    n: "02",
-    title: "find your match",
-    body: "Both sides have to want it: the dates, the place, the vibe. Like Hinge, for holidays.",
-  },
-  {
-    n: "03",
-    title: "agree the swap",
-    body: "Message, plan, sort the keys and the plants. We handle the protection in the background.",
-  },
-  {
-    n: "04",
-    title: "trade places",
-    body: "You go there. They come here. Two homes lived in, loved, and handed back.",
-  },
-];
-
-const trustCards: Trust[] = [
-  {
-    icon: (
-      <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-        <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-    ),
-    title: "Everyone is verified",
-    body: "ID-checked members, real reviews from both sides of every past swap. You know who's coming.",
-  },
-  {
-    icon: (
-      <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-        <path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <path d="M9 21v-7h6v7" />
-      </svg>
-    ),
-    title: "Your home is covered",
-    body: "Damage protection on every confirmed swap, no deposit to chase, no awkward bond conversations.",
-  },
-  {
-    icon: (
-      <svg className="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      </svg>
-    ),
-    title: "Real humans, when it matters",
-    body: "A small team that actually answers — because letting someone into your home is a big deal, and we know it.",
-  },
-];
+import { Reveal } from "../ui/Reveal";
+import { SmileArc } from "../ui/SmileArc";
 
 export function HowItWorks() {
+  const steps = [
+    {
+      n: "01",
+      t: "Put your home in",
+      d: "Five honest photos and a few honest words. Your place joins the pool. No commission, no listing fee, no upsells. Ever.",
+      hint: "takes about ten minutes",
+      bg: "bg-paper-warm",
+      accent: "text-brand",
+      dot: "bg-brand",
+      muted: "text-ink/40",
+      body: "text-ink/70",
+    },
+    {
+      n: "02",
+      t: "Find your pair",
+      d: "Match with someone whose place excites you, and whose dates fit yours. Like dating, but for sofas and skylines.",
+      hint: "average match: 2 days",
+      bg: "bg-pink/50",
+      accent: "text-brand",
+      dot: "bg-brand",
+      muted: "text-ink/45",
+      body: "text-ink/75",
+    },
+    {
+      n: "03",
+      t: "Swap and go",
+      d: "You stay in theirs. They stay in yours. Nobody pays anybody. The maths sorts itself.",
+      hint: "12,400 swaps and counting",
+      bg: "bg-brand",
+      accent: "text-pink",
+      dot: "bg-pink",
+      muted: "text-pink/70",
+      body: "text-paper/80",
+      title: "text-paper",
+    },
+  ];
   return (
-    <section id="how" className="how section-pad">
-      <div className="wrap-wide">
-        <Reveal className="section-head" as="div">
-          <div>
-            <Eyebrow>how it works</Eyebrow>
-            <h2 className="display" style={{ margin: "14px 0 0" }}>
-              two homes, <em>finding</em> each other.
+    <section id="how" className="border-b border-ink/8 py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <Reveal>
+          <div className="max-w-3xl">
+            <div className="text-xs uppercase tracking-[0.18em] text-brand">
+              How it works
+            </div>
+            <h2 className="mt-4 font-display text-5xl font-light leading-[1] tracking-tight text-ink lg:text-7xl">
+              Three steps.
+              <br />
+              <em className="text-brand">Zero middlemen.</em>
             </h2>
           </div>
-          <p className="lede muted" style={{ maxWidth: "34ch" }}>
-            You can&apos;t take a place without offering your own. The swap is reciprocal by
-            design — that&apos;s the whole point, and the reason it stays free.
-          </p>
         </Reveal>
 
-        <Reveal className="loop-wrap">
-          <svg className="loop-arc" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-            <path
-              className="smile-stroke smile-draw"
-              d="M40 30 C 320 150, 880 150, 1160 30"
-              strokeWidth="2.5"
-            />
-          </svg>
-          <div className="loop-steps">
-            {steps.map((s) => (
-              <div className="step" key={s.n}>
-                <div className="n">{s.n}</div>
-                <h4>{s.title}</h4>
-                <p>{s.body}</p>
+        <div className="mt-16 grid gap-5 lg:grid-cols-3 lg:gap-6">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 140} className="h-full">
+              <div
+                className={`group h-full rounded-3xl p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-ink/15 lg:p-10 ${s.bg}`}
+              >
+                <div className="flex items-start justify-between">
+                  <div
+                    className={`font-display text-[clamp(4rem,7vw,6rem)] font-light leading-none transition-transform duration-500 group-hover:-translate-y-1 ${s.accent}`}
+                  >
+                    {s.n}
+                  </div>
+                  <SmileArc
+                    className={`mt-4 h-4 w-14 opacity-50 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 ${s.accent}`}
+                  />
+                </div>
+                <div className="mt-12">
+                  <h3
+                    className={`font-display text-3xl leading-tight lg:text-4xl ${
+                      s.title ?? "text-ink"
+                    }`}
+                  >
+                    {s.t}
+                  </h3>
+                  <p className={`mt-4 ${s.body}`}>{s.d}</p>
+                  <div
+                    className={`mt-7 inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.18em] ${s.muted}`}
+                  >
+                    <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
+                    {s.hint}
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal className="trust-row" as="div">
-          {trustCards.map((t) => (
-            <div className="trust" key={t.title}>
-              {t.icon}
-              <h5>{t.title}</h5>
-              <p>{t.body}</p>
-            </div>
+            </Reveal>
           ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   );

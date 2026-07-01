@@ -21,7 +21,7 @@ export default async function ProgressPage() {
     <main className="pt-8">
       <div className="mb-8 flex items-end justify-between gap-6">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink/50">Team board</p>
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink/50">Ticket board</p>
           <h1 className="font-display text-4xl tracking-tight mt-1">Progress</h1>
         </div>
         <div className="text-right text-xs text-ink/50">
