@@ -3,7 +3,7 @@ import { SignOutButton } from "./SignOutButton";
 import type { SessionData } from "@/lib/session";
 import { BaandyLogo } from "@/components/ui/Logo";
 import Image from "next/image";
-export function PortalHeader({ user }: { user: SessionData }) {
+export function PortalHeader({ user }: { user: SessionData | null }) {
   return (
     <header className="border-b border-ink/10 bg-paper-warm/60 backdrop-blur">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
@@ -26,12 +26,15 @@ export function PortalHeader({ user }: { user: SessionData }) {
           </Link>
         </nav>
 
+
+{user ? (
+
         <div className="flex items-center gap-3">
           <div className="hidden text-right text-xs text-ink/60 sm:block">
-            <p className="text-ink">{user.name}</p>
-            <p className="text-[10px]">{user.email}</p>
+            <p className="text-ink">{user?.name}</p>
+            <p className="text-[10px]">{user?.email}</p>
           </div>
-          {user.imageUrl ? (
+          {user?.imageUrl ? (
             <Image
               width={32}
               height={32}
@@ -42,11 +45,21 @@ export function PortalHeader({ user }: { user: SessionData }) {
             />
           ) : (
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-xs font-medium text-paper">
-              {user.name.charAt(0).toUpperCase()}
+              {user?.name.charAt(0).toUpperCase()}
             </div>
           )}
           <SignOutButton />
         </div>
+): (
+  <div className="flex items-center gap-3">
+    <Link
+      href="/signin"
+      className="rounded-full  px-5 py-2.5 text-sm font-medium text-paper transition hover:bg-ink"
+    >
+      Sign in
+    </Link>
+  </div>
+)}
       </div>
     </header>
   );

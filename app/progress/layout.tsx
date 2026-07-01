@@ -11,7 +11,7 @@ export default async function ProgressLayout({ children }: { children: React.Rea
   return (
     <div className="min-h-screen bg-paper text-ink">
       <PortalHeader user={user} />
-      <div className="mx-auto max-w-[1400px] px-6 pb-16">{children}</div>
+      <div className="mx-auto max-w-[1400px] h-full px-6 pb-16">{children}</div>
     </div>
   );
 }

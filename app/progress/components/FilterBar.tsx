@@ -2,6 +2,7 @@
 
 import { TASK_AREAS, type TaskArea, type User } from "@/lib/db";
 import clsx from "clsx";
+import { FormSelect } from "@/components/ui/CustomInlineSelect";
 
 type Member = Pick<User, "id" | "name" | "email" | "imageUrl">;
 
@@ -29,21 +30,19 @@ export function FilterBar({
   members: Member[];
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <select
-        value={filters.assigneeId ?? ""}
-        onChange={(e) =>
-          onChange({ ...filters, assigneeId: e.target.value === "" ? null : e.target.value })
-        }
-        className="rounded-md border border-ink/15 bg-paper px-3 py-1.5 text-sm text-ink"
-      >
-        <option value="">All assignees</option>
-        {members.map((m) => (
-          <option key={m.id} value={m.id}>
-            {m.name}
-          </option>
-        ))}
-      </select>
+    <div className="flex flex-wrap items-center gap-4">
+      <div className="w-48">
+        <FormSelect
+          value={filters.assigneeId ?? ""}
+          onChange={(v) =>
+            onChange({ ...filters, assigneeId: v === "" ? null : v })
+          }
+          options={[
+            { value: "", label: "All assignees" },
+            ...members.map((m) => ({ value: m.id, label: m.name })),
+          ]}
+        />
+      </div>
 
       <div className="flex flex-wrap items-center gap-1">
         <button

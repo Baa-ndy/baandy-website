@@ -13,6 +13,7 @@ import {
   type TaskStatus,
   type User,
 } from "@/lib/db";
+import { FormSelect } from "@/components/ui/CustomInlineSelect";
 import type { TaskWithPeople } from "../queries";
 import { editTask, deleteTask, updateTaskStatus } from "../actions";
 import { AreaBadge } from "./AreaBadge";
@@ -106,7 +107,7 @@ export function TaskDetailModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-ink/40 px-4 py-16 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -155,25 +156,25 @@ export function TaskDetailModal({
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Select
+            <FormSelect
               label="Status"
               value={status}
               onChange={(v) => setStatus(v as TaskStatus)}
               options={TASK_STATUSES.map((s) => ({ value: s, label: STATUS_LABEL[s] }))}
             />
-            <Select
+            <FormSelect
               label="Priority"
               value={priority}
               onChange={(v) => setPriority(v as TaskPriority)}
               options={TASK_PRIORITIES.map((p) => ({ value: p, label: p }))}
             />
-            <Select
+            <FormSelect
               label="Area"
               value={area}
               onChange={(v) => setArea(v as TaskArea)}
               options={TASK_AREAS.map((a) => ({ value: a, label: a }))}
             />
-            <Select
+            <FormSelect
               label="Assignee"
               value={assigneeId}
               onChange={setAssigneeId}
@@ -225,33 +226,3 @@ export function TaskDetailModal({
   );
 }
 
-function Select({
-  label,
-  value,
-  onChange,
-  options,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: { value: string; label: string }[];
-}) {
-  return (
-    <div>
-      <label className="block text-[10px] font-medium uppercase tracking-wider text-ink/50">
-        {label}
-      </label>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full rounded-md border border-ink/8 bg-paper px-2 py-1.5 text-sm capitalize"
-      >
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}

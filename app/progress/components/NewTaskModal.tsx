@@ -12,6 +12,7 @@ import {
   type TaskStatus,
   type User,
 } from "@/lib/db";
+import { FormSelect } from "@/components/ui/CustomInlineSelect";
 import { createTask } from "../actions";
 
 type Member = Pick<User, "id" | "name" | "email" | "imageUrl">;
@@ -85,7 +86,7 @@ export function NewTaskModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-ink/40 px-4 pt-24 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -132,59 +133,33 @@ export function NewTaskModal({
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <Field label="Status">
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value as TaskStatus)}
-                className="w-full rounded-md border border-ink/15 bg-paper px-2 py-1.5 text-sm"
-              >
-                {TASK_STATUSES.map((s) => (
-                  <option key={s} value={s}>
-                    {s.replace("_", " ")}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Priority">
-              <select
-                value={priority}
-                onChange={(e) => setPriority(e.target.value as TaskPriority)}
-                className="w-full rounded-md border border-ink/15 bg-paper px-2 py-1.5 text-sm"
-              >
-                {TASK_PRIORITIES.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Area">
-              <select
-                value={area}
-                onChange={(e) => setArea(e.target.value as TaskArea)}
-                className="w-full rounded-md border border-ink/15 bg-paper px-2 py-1.5 text-sm"
-              >
-                {TASK_AREAS.map((a) => (
-                  <option key={a} value={a}>
-                    {a}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Assignee">
-              <select
-                value={assigneeId}
-                onChange={(e) => setAssigneeId(e.target.value)}
-                className="w-full rounded-md border border-ink/15 bg-paper px-2 py-1.5 text-sm"
-              >
-                <option value="">Unassigned</option>
-                {members.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.name}
-                  </option>
-                ))}
-              </select>
-            </Field>
+            <FormSelect
+              label="Status"
+              value={status}
+              onChange={(v) => setStatus(v as TaskStatus)}
+              options={TASK_STATUSES.map((s) => ({ value: s, label: s.replace("_", " ") }))}
+            />
+            <FormSelect
+              label="Priority"
+              value={priority}
+              onChange={(v) => setPriority(v as TaskPriority)}
+              options={TASK_PRIORITIES.map((p) => ({ value: p, label: p }))}
+            />
+            <FormSelect
+              label="Area"
+              value={area}
+              onChange={(v) => setArea(v as TaskArea)}
+              options={TASK_AREAS.map((a) => ({ value: a, label: a }))}
+            />
+            <FormSelect
+              label="Assignee"
+              value={assigneeId}
+              onChange={setAssigneeId}
+              options={[
+                { value: "", label: "Unassigned" },
+                ...members.map((m) => ({ value: m.id, label: m.name })),
+              ]}
+            />
           </div>
 
           {error ? <p className="text-sm text-pink-deep">{error}</p> : null}
@@ -211,13 +186,3 @@ export function NewTaskModal({
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <label className="block text-[10px] font-medium uppercase tracking-wider text-ink/60">
-        {label}
-      </label>
-      <div className="mt-1.5">{children}</div>
-    </div>
-  );
-}
