@@ -17,9 +17,7 @@ export function PortalHeader({ user }: { user: SessionData }) {
           <Link href="/progress" className="hover:text-ink">
             Board
           </Link>
-          <Link href="/docs" className="hover:text-ink">
-            Docs
-          </Link>
+    
           <Link href="/" className="hover:text-ink">
             Site
           </Link>
