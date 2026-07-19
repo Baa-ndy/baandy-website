@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { signOutOfFirebase } from "@/lib/firebase/client";
+import { LogOut } from "lucide-react";
 
 export function SignOutButton() {
   const router = useRouter();
@@ -31,7 +32,10 @@ export function SignOutButton() {
         disabled={isPending}
         className="text-xs text-ink/60 underline-offset-2 hover:text-ink hover:underline disabled:opacity-50"
       >
-        {isPending ? "Signing out…" : "Sign out"}
+  
+
+   {isPending ? "Signing out…" :  <LogOut className="ml-1 inline h-3 w-3" />}
+   
       </button>
       {error ? <p className="mt-1 text-[10px] text-pink-deep">{error}</p> : null}
     </div>

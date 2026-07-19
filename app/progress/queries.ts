@@ -41,7 +41,7 @@ export async function getActiveTasks(): Promise<TaskWithPeople[]> {
 }
 
 export async function getTeamMembers(): Promise<Pick<User, "id" | "name" | "email" | "imageUrl">[]> {
-  return db
+  const teamMembers = await db
     .select({
       id: users.id,
       name: users.name,
@@ -51,6 +51,12 @@ export async function getTeamMembers(): Promise<Pick<User, "id" | "name" | "emai
     .from(users)
     .orderBy(asc(users.name))
     .all();
+
+  
+
+    return teamMembers;
+
+
 }
 
 export async function getTaskActivity(taskId: string) {

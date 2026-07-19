@@ -32,7 +32,7 @@ export function Logo({ variant = "default" }: LogoProps) {
 export function BaandyLogo({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 108 108" fill="none" className={className} aria-hidden>
-      <rect width="108" height="108" rx="22" fill="currentColor" />
+      <rect width="108" height="108" rx="22" fill="var(--color-brand)" />
       <path
         d="M52.03 78c-9.87 0-17.98-6.98-18.7-15.8a1.16 1.16 0 0 1 1.16-1.29h5.53c.59 0 1.08.45 1.16 1.04.62 4.53 5.25 8.06 10.85 8.06s10.23-3.53 10.86-8.06c.08-.6.57-1.04 1.16-1.04h5.52c.69 0 1.23.59 1.17 1.29C70.02 71.03 61.9 78 52.03 78Z"
         fill="var(--color-pink)"

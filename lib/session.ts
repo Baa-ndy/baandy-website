@@ -1,7 +1,9 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { getIronSession, type SessionOptions } from "iron-session";
+import { eq } from "drizzle-orm";
 import type { UserRole } from "@/lib/db/schema";
+import { db, allowedEmails } from "@/lib/db";
 
 export type SessionData = {
   uid: string;
@@ -65,6 +67,19 @@ export function getAllowedEmails(): string[] {
     .split(",")
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);
+}
+
+export async function isAllowedEmail(email: string): Promise<boolean> {
+  const normalizedEmail = email.toLowerCase();
+  const envAllowed = getAllowedEmails().includes(normalizedEmail);
+  if (envAllowed) return true;
+
+  const inDb = await db
+    .select()
+    .from(allowedEmails)
+    .where(eq(allowedEmails.email, normalizedEmail))
+    .get();
+  return !!inDb;
 }
 
 export function isAllowed(email: string): boolean {

@@ -38,7 +38,7 @@ export default async function SignInPage({
         <SignInButton redirectTo={params.from ?? "/progress"} />
 
         <p className="mt-8 text-center text-xs text-ink/50">
-          Access is limited to team members on the allowlist. Talk to Selam if your email isn&apos;t recognised.
+          Access is limited to Baandy team members. Ask a member to invite you if you don’t have an account yet.
         </p>
         </div>
       </main>

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, users, type UserRole } from "@/lib/db";
 import { verifyIdToken } from "@/lib/firebase/admin";
-import { isAllowed, writeSession } from "@/lib/session";
+import { isAllowedEmail, writeSession } from "@/lib/session";
 
 export async function POST(req: Request) {
   let body: { idToken?: string };
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   if (!email) {
     return NextResponse.json({ error: "Token has no email." }, { status: 400 });
   }
-  if (!isAllowed(email)) {
+  if (!(await isAllowedEmail(email))) {
     return NextResponse.json(
       { error: "This email is not on the portal allowlist." },
       { status: 403 },

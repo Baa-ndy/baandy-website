@@ -10,7 +10,7 @@ export type TaskPriority = (typeof TASK_PRIORITIES)[number];
 export const TASK_AREAS = ["mobile", "backend", "website", "design", "ops", "general"] as const;
 export type TaskArea = (typeof TASK_AREAS)[number];
 
-export const USER_ROLES = ["admin", "member"] as const;
+export const USER_ROLES = ["admin", "member", "helper-bot"] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 
 export const ACTIVITY_KINDS = [
@@ -95,3 +95,17 @@ export const taskActivity = sqliteTable(
 
 export type TaskActivity = typeof taskActivity.$inferSelect;
 export type NewTaskActivity = typeof taskActivity.$inferInsert;
+
+export const allowedEmails = sqliteTable("allowed_emails", {
+  id: text("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  invitedBy: text("invited_by")
+    .notNull()
+    .references(() => users.id, { onDelete: "set null" }),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .notNull()
+    .default(sql`(unixepoch())`),
+});
+
+export type AllowedEmail = typeof allowedEmails.$inferSelect;
+export type NewAllowedEmail = typeof allowedEmails.$inferInsert;

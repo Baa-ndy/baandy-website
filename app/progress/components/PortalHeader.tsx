@@ -10,20 +10,22 @@ export function PortalHeader({ user }: { user: SessionData | null }) {
         <Link href="/progress" className="flex items-center gap-3">
           <BaandyLogo className="h-9 w-9" />
 
-                    <span className="font-display text-2xl tracking-tight text-ink">Baandy</span>
+            
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">
             Team portal
           </span>
         </Link>
 
         <nav className="hidden items-center gap-5 text-sm text-ink/70 md:flex">
-          <Link href="/progress" className="hover:text-ink">
-            Board
-          </Link>
-    
-          <Link href="/" className="hover:text-ink">
+             <Link href="/" className="hover:text-ink">
             Site
           </Link>
+              <Link href="/team" className="hover:text-ink">
+          Team
+          </Link>
+    
+
+
         </nav>
 
 

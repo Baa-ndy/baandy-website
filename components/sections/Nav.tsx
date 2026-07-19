@@ -20,7 +20,7 @@ export function Nav() {
         </nav>
         <a
           href="#download"
-          className="rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-paper transition hover:bg-ink"
+          className="rounded-full bg-brand px-5 py-2.5  border border-ink/15 bg-paper text-ink transition hover:border-pink/40 hover:bg-pink/5"
         >
           Get the app
         </a>
